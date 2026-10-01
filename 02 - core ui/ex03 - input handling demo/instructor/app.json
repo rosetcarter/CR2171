@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Input Handling Reference",
+    "slug": "input-handling-reference",
+    "scheme": "inputhandlingreference",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#f5efe7"
+    },
+    "android": {
+      "package": "ca.nait.sdev2171.inputhandlingreference"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
