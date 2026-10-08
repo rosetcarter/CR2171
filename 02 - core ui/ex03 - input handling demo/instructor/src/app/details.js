@@ -4,14 +4,20 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function DetailsScreen() {
   const router = useRouter();
-  const [note, setNote] = useState('');
+
+  const [note, setNote]                 = useState('');
   const [responseText, setResponseText] = useState('No preview yet.');
 
   function handlePreview() {
+    /* We don't actually *need* two state variables here.
+
+       If we wanted to, we could simply trim note, render from this variable 
+       *that is derivative of state*, so changes to that state would still update this value.
+    */
     const trimmedNote = note.trim();
 
     if (trimmedNote.length === 0) {
-      setResponseText('Type a short note first, then preview the response.');
+      setResponseText(trimmedNote.length);
       return;
     }
 
@@ -21,18 +27,7 @@ export default function DetailsScreen() {
   return (
     <View style={styles.safeArea}>
       <View style={styles.container}>
-        <TextInput
-          placeholder="Tell me what you had for breakfast"
-          style={{ borderWidth: 1, padding: 12 }}
-          onChangeText={(text) => { noteVar = text; }}
-        />
-
-        <Pressable onPress={() => console.log('pressed!')}>
-          <Text>Preview Response</Text>
-        </Pressable>
-
-        <Text>{noteVar}</Text>
-        {/* <Text style={styles.eyebrow}>Interactive detail route</Text>
+        <Text style={styles.eyebrow}>Interactive detail route</Text>
         <Text style={styles.title}>Input Handling Screen</Text>
         <Text style={styles.body}>
           This screen captures a short note and shows visible feedback after the user presses the action button.
@@ -40,6 +35,12 @@ export default function DetailsScreen() {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Try one short input</Text>
+          {/* NOTE: When we process the onChangeText event, we don't need to e.g. 
+                { (e) => setNote(e.target.value) }
+
+              The current value of the text input is implied; if we simply provide the name of the setter,
+              it will automatically pass on that value. Boo for lack of explicitness; hooray for lack of boilerplate code.
+          */}
           <TextInput
             value={note}
             onChangeText={setNote}
@@ -59,7 +60,7 @@ export default function DetailsScreen() {
 
         <Pressable style={styles.secondaryButton} onPress={() => router.back()}>
           <Text style={styles.secondaryButtonLabel}>Go back</Text>
-        </Pressable> */}
+        </Pressable>
       </View>
     </View>
   );

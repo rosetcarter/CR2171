@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Dynamic List Reference",
+    "slug": "dynamic-list-reference",
+    "scheme": "dynamiclistreference",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#f5efe7"
+    },
+    "android": {
+      "package": "ca.nait.sdev2171.dynamiclistreference"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
