@@ -76,14 +76,35 @@ export default function DetailsScreen() {
         ) : (
           <View style={styles.listCard}>
             <Text style={styles.listLabel}>Current study list</Text>
-            <FlatList
+
+            {
+              <FlatList
+                data={studySteps}
+                keyExtractor={(item) => item.id}
+                renderItem={
+                  ({ item, index }) => {<View style={styles.stepRow}>
+                    <Text style={styles.stepIndex}>{index + 1}.</Text>
+                    <Text style={styles.stepLabel}>{item.label}</Text>
+                  </View>}
+                }
+              />
+            }
+            {/* ^ swap to FlatList; output is getting kind of unreadable */}
+            
+            {/* Note what we 'lose' in this comparison:
+            - convenient application of styles
+            - easy separator
+            - performance-wise, optimisations for larger data series & lazy loading
+            - many more things (see docs): https://reactnative.dev/docs/flatlist */}
+
+            {/* <FlatList
               data={studySteps}
               keyExtractor={(item) => item.id}
               renderItem={renderStep}
               ItemSeparatorComponent={() => <View style={styles.separator} />}
               style={styles.list}
               contentContainerStyle={styles.listContent}
-            />
+            /> */}
           </View>
         )}
 

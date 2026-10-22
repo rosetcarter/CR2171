@@ -1,0 +1,159 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Lesson 11 Bug Cards</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --fg: #16202a;
+    --muted: #556270;
+    --line: #d7dde4;
+    --accent: #0067b1;
+    --accent-fg: #ffffff;
+    --code-bg: #eef2f6;
+    --font-body: Arial, Helvetica, sans-serif;
+    --font-code: Menlo, Consolas, "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11161c; --surface: #1a2129; --fg: #e8edf2; --muted: #9aa8b6;
+      --line: #2e3945; --accent: #4aa3e8; --accent-fg: #0b1218; --code-bg: #242d37;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11161c; --surface: #1a2129; --fg: #e8edf2; --muted: #9aa8b6;
+    --line: #2e3945; --accent: #4aa3e8; --accent-fg: #0b1218; --code-bg: #242d37;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.5;
+    padding-block: 24px 40px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  main { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  h1 { font-size: 28px; margin: 0; text-wrap: balance; }
+  .steps { margin: 0; padding-left: 22px; color: var(--muted); }
+  .steps li { margin: 2px 0; }
+  .picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .picker button {
+    font: 700 22px var(--font-body);
+    padding: 18px 0;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .picker button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+  .picker button:focus-visible, .hide:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  .card h2 { margin: 0; font-size: 22px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  code {
+    font-family: var(--font-code);
+    font-size: 15px;
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+  }
+  .field code { display: block; padding: 10px 12px; }
+  .hide {
+    align-self: flex-start;
+    font: 700 15px var(--font-body);
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--fg);
+    cursor: pointer;
+  }
+  .placeholder { color: var(--muted); margin: 0; }
+</style>
+
+<main>
+  <h1>Lesson 11 Bug Cards</h1>
+  <ol class="steps">
+    <li>Tap the card number your instructor gave you. Don't let your partner see.</li>
+    <li>Make the change on your partner's laptop while they look away. Save.</li>
+    <li>Tap Hide card.</li>
+  </ol>
+
+  <div class="picker" role="group" aria-label="Card number">
+    <button type="button" id="pick-3" data-card="3" aria-pressed="false">3</button>
+    <button type="button" id="pick-4" data-card="4" aria-pressed="false">4</button>
+    <button type="button" id="pick-5" data-card="5" aria-pressed="false">5</button>
+    <button type="button" id="pick-6" data-card="6" aria-pressed="false">6</button>
+  </div>
+
+  <p class="placeholder" id="placeholder">No card showing.</p>
+
+  <section class="card" id="card-3" hidden>
+    <h2>Card 3</h2>
+    <div class="field"><p class="label">File</p><code>src/app/details.js</code></div>
+    <div class="field"><p class="label">Find</p><code>{studySteps.length === 0 ? (</code></div>
+    <div class="field"><p class="label">Change it to</p><code>{studySteps.length &lt; 0 ? (</code></div>
+    <p>Save.</p>
+    <button type="button" class="hide" id="hide-3">Hide card</button>
+  </section>
+
+  <section class="card" id="card-4" hidden>
+    <h2>Card 4</h2>
+    <div class="field"><p class="label">File</p><code>src/app/details.js</code>, inside <code>handleAddStep</code></div>
+    <div class="field"><p class="label">Find</p><code>label: trimmedStep</code></div>
+    <div class="field"><p class="label">Change it to</p><code>text: trimmedStep</code></div>
+    <p>Save.</p>
+    <button type="button" class="hide" id="hide-4">Hide card</button>
+  </section>
+
+  <section class="card" id="card-5" hidden>
+    <h2>Card 5</h2>
+    <div class="field"><p class="label">File</p><code>src/app/details.js</code>, inside <code>handleAddStep</code></div>
+    <div class="field"><p class="label">Find</p><code>if (trimmedStep.length === 0) {</code></div>
+    <div class="field"><p class="label">Change it to</p><code>if (trimmedStep.length !== 0) {</code></div>
+    <p>Save.</p>
+    <button type="button" class="hide" id="hide-5">Hide card</button>
+  </section>
+
+  <section class="card" id="card-6" hidden>
+    <h2>Card 6</h2>
+    <div class="field"><p class="label">File</p><code>src/app/details.js</code>, on the Clear list button</div>
+    <div class="field"><p class="label">Find</p><code>onPress={handleClearSteps}</code></div>
+    <div class="field"><p class="label">Change it to</p><code>onPress={handleAddStep}</code></div>
+    <p>Save.</p>
+    <button type="button" class="hide" id="hide-6">Hide card</button>
+  </section>
+</main>
+
+<script>
+  const pickers = document.querySelectorAll('.picker button');
+  const cards = document.querySelectorAll('.card');
+  const placeholder = document.getElementById('placeholder');
+
+  function show(number) {
+    cards.forEach((card) => { card.hidden = card.id !== 'card-' + number; });
+    pickers.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.card === number)));
+    placeholder.hidden = number !== null;
+  }
+
+  pickers.forEach((btn) => btn.addEventListener('click', () => show(btn.dataset.card)));
+  document.querySelectorAll('.hide').forEach((btn) => btn.addEventListener('click', () => show(null)));
+</script>
+
+</body></html>
